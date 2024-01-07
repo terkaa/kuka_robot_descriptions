@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<robot name="table" xmlns:xacro="http://wiki.ros.org/xacro">
+
+
+ <!-- coloring from the stl file -->
+  <material name="yellow">
+    <color rgba="1 1 0 1"/>
+  </material>
+
+<material name="brown">
+    <color rgba="0.39 0.69 0.19 1"/>
+  </material>
+  <!-- coloring from the table -->
+  <material name="grey">
+    <color rgba="0.75 0.75 0.75 1"/>
+  </material>
+
+  <link name="robot_frame">
+    <visual>
+      <origin rpy="0 0 0" xyz="3 3 0"/>
+      <geometry>
+         <mesh filename="package://kuka_agilus_support/meshes/recirculate/Robot_frame.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <!--origin rpy="0 0 0" xyz="0 0 -0.02"/>
+      <geometry>
+         <box size="0.8 0.86 0.02"/>
+      </geometry-->
+      <material name="grey"/>
+    </visual>
+  </link>
+<!--
+  <link name="work_table">
+    <visual>
+      <origin rpy="${DEG2RAD * 180} 0 ${DEG2RAD * 90}" xyz="0.621 -0.025 0.119"/>
+      <geometry>
+        <mesh filename="package://kuka_kr6_support/meshes/centria/poyta.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="brown"/>
+    </visual>
+  </link>
+
+<link name="work_object">
+    <visual>
+      <origin rpy="${DEG2RAD * 180} 0 ${DEG2RAD * -90}" xyz="0.621 -0.025 0.119"/>
+      <geometry>
+        <mesh filename="package://kuka_kr6_support/meshes/centria/aihio.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+  </link>
+-->
+  <joint name="robot_frame_joint" type="fixed">
+    <parent link="robot_frame"/>
+    <child link="base_link"/>
+  </joint>
+<!--
+  <joint name="work_table_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="work_table"/>
+  </joint>
+
+<joint name="work_object_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="work_object"/>
+  </joint>
+-->
+</robot>

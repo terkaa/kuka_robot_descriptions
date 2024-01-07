@@ -7,4 +7,7 @@
   <xacro:arg name="use_fake_hardware" default="false" />
 
   <xacro:kuka_kr10_r1100_2_robot prefix="" use_fake_hardware="$(arg use_fake_hardware)"/>
+
+<xacro:include filename="$(find kuka_agilus_support)/urdf/recirculate.xacro"/>
+
 </robot>
