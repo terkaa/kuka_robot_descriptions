@@ -1,13 +1,32 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kr10_r1100_2">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kr10_r1100_2_ext_axis">
   <!-- Import urdf file  -->
+  <xacro:include filename="$(find kuka_agilus_support)/urdf/kl100_linear_axis.xacro"/>
   <xacro:include filename="$(find kuka_agilus_support)/urdf/kr10_r1100_2_macro.xacro"/>
 
   <!-- Read additional arguments  -->
   <xacro:arg name="use_fake_hardware" default="false" />
 
-  <xacro:kuka_kr10_r1100_2_robot prefix="" use_fake_hardware="$(arg use_fake_hardware)"/>
+  
 
-<xacro:include filename="$(find kuka_agilus_support)/urdf/recirculate.xacro"/>
+<!--xacro:include filename="$(find kuka_agilus_support)/urdf/recirculate.xacro"/-->
+
+  <link name="world" />
+
+  <joint name="world_joint" type="fixed">
+            <parent link="world" />
+            <child link="kl100_frame" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        </joint>
+        
+  <xacro:kl100_linear_axis prefix=""/>
+
+        <joint name="attachment_joint" type="fixed">
+            <parent link="axis7" />
+            <child link="base_link" />
+            <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        </joint>
+
+  <xacro:kuka_kr10_r1100_2_robot prefix="" use_fake_hardware="$(arg use_fake_hardware)"/>
 
 </robot>

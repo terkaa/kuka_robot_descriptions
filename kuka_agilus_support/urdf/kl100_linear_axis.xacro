@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <robot xmlns:xacro="https://ros.org/wiki/xacro">
+        <xacro:macro name="kl100_linear_axis" params="prefix">
+        <link name="${prefix}kl100_frame">
+                <visual>
+                    <origin rpy="0 0 0" xyz="3 3.3 -0.1"/>
+                    <geometry>
+                        <mesh filename="package://kuka_agilus_support/meshes/recirculate/Robot_frame.stl" scale="0.001 0.001 0.001"/>
+                    </geometry>
+                    <material name="">
+                        <color rgba="1.0 1.0 1.0 1.0"/>
+                    </material>
+                </visual>
+                <collision>
+                    <origin rpy="0 0 0" xyz="3 3.3 -0.1"/>
+                    <geometry>
+                        <mesh filename="package://kuka_agilus_support/meshes/recirculate/Robot_frame.stl" scale="0.001 0.001 0.001"/>
+                    </geometry>
+                </collision>
+            </link>
+            
+          <joint name="frame_kl100_joint" type="fixed">
+            <parent link="kl100_frame" />
+            <child link="kl100_linear_axis" />
+            <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+          </joint>
+        
+        
+        
+            <link name="${prefix}kl100_linear_axis">
+                <visual>
+                    <origin rpy="0 0 ${pi}" xyz="0 0 1.9"/>
+                    <geometry>
+                        <mesh filename="package://kuka_agilus_support/meshes/recirculate/Linear_axis_base.stl" scale="0.001 0.001 0.001"/>
+                    </geometry>
+                    <material name="">
+                        <color rgba="1.0 1.0 1.0 1.0"/>
+                    </material>
+                </visual>
+                <collision>
+                    <origin rpy="0 0 ${pi}" xyz="0 0 1.9"/>
+                    <geometry>
+                        <mesh filename="package://kuka_agilus_support/meshes/recirculate/Linear_axis_base.stl" scale="0.001 0.001 0.001"/>
+                    </geometry>
+                </collision>
+            </link>
+
+	 <joint name="${prefix}axis7_joint" type="prismatic">
+                <parent link="${prefix}kl100_linear_axis"/>
+                <child link="${prefix}axis7"/>
+                <!-- Here we enter the joint position just defined before -->
+                <origin xyz="0 0.1 1.95" rpy="0 0 ${pi}"/>
+                <!-- Here we define the axis along which the geometry is moved -->
+                <axis xyz="0 0 1"/>
+                <!-- Here we define the joint's upper and lower limits -->
+                <limit effort="1000.0" lower="0.0" upper="1.86" velocity="0.5"/>
+            </joint>
+
+            <link name="${prefix}axis7">
+                <visual>
+                    <geometry>
+                        <mesh filename="package://kuka_agilus_support/meshes/recirculate/Linear_axis_slide.stl" scale="0.001 0.001 0.001"/>
+                    </geometry>
+                    <material name="">
+                        <color rgba="1.0 1.0 1.0 1.0"/>
+                    </material>
+                </visual>
+                <collision>
+                    <geometry>
+                        <mesh filename="package://kuka_agilus_support/meshes/recirculate/Linear_axis_slide.stl" scale="0.001 0.001 0.001"/>
+                    </geometry>
+                </collision>
+            </link>
+            
+    </xacro:macro>
+    </robot>
